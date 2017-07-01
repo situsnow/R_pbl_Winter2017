@@ -47,6 +47,7 @@ head(ti_train)
 ### Addressing the rest of the missing data
 
 # We now need to see how many other NA's we have to fix up. 
+# colSums(is.na(ti_train)) to check the statistics of NAs
 ti_train[!complete.cases(ti_train),]
 # We need to deal with the 'Age' and 'Embark' data. 
 
