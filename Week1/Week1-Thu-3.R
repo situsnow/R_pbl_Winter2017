@@ -86,6 +86,9 @@ dplyr::filter(ti_train, is.na(Embarked))
 
 # Get an idea of the proportions that came from each city. 
 #We can use prop.table() function to make a table of these proprtions.
+# prop.table(x) - cell percentage
+# prop.table(x, 1) - row percentage
+# prop.table(x, 2) - column percentage
 prop.table(table(ti_train$Embarked))
 # ~19% from Cherbourg, ~0.9% from Queenstown and ~72% from Southampton.
 # We will replace the NA's with 'S' then. Why would we do this? 
@@ -105,3 +108,9 @@ sum(is.na(ti_train$Embarked))
 ### Your task is to clean up the 'ti_test' data
 # *Hint* There will be a third variable that we did not cover in the training data set. 
 # We have covered how to resolve this issue.
+colSums(is.na(ti_test))
+ti_test <- select(ti_test, -Cabin)
+
+ti_test$Age[is.na(ti_test$Age)] <- mean(ti_test$Age, na.rm = TRUE)
+ti_test$Fare[is.na(ti_test$Fare)] <- mean(ti_test$Fare, na.rm = TRUE)
+ti_test[!complete.cases(ti_test),]
