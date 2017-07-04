@@ -36,7 +36,9 @@ x <- rnorm(1, mean = 5, sd = 5)
 
 
 # (Type your code here)
-
+if (x < 7){
+  x
+}
 
 # Challenge 2: Let's bring back the gapminder data, use an if() statement to print a suitable message reporting 
 # whether there are any records from 2012 in the gapminder dataset. 
@@ -46,6 +48,11 @@ gapminder <- read.csv("gapminder-FiveYearData.csv")
 
 # (Type your code here)
 
+has2012 <- gapminder$year == 1952
+if (any(has2012 == TRUE)){
+  msg <- "Hello World."
+  msg
+}
 
 #### Repeating operations
 
@@ -71,7 +78,11 @@ DayMonth <- c()
 
 
 # your code: 
-
+for (month in 1:length(Month)){
+  for (day in 1:length(Day)){
+    DayMonth <- c(DayMonth, paste(Day[day], Month[month], sep = " "))
+  }
+}
 
 
 # **Note** One of the biggest things that trips up novices and experienced R users alike,
@@ -86,7 +97,12 @@ DayMonth <- c()
 
 
 # your code:
-
+DayMonth <- matrix(, nrow = length(Month), ncol = length(Day))
+for (month in 1:length(Month)){
+  for (day in 1:length(Day)){
+    DayMonth[month, day] <- paste(Day[day], Month[month], sep = " ")
+  }
+}
 
 # The while loop is a continuous looping function when the given logical condition is true. 
 # If the logical condition is false, the loop is never executed. The structure of while loop is as follows:
@@ -100,7 +116,15 @@ DayMonth <- c()
 
 
 # your code:
-
+counter <- 1
+num <- 5
+while (num < 56 && counter < 10){
+  if (num %% 3 == 0){
+    print(num)
+    counter <- counter + 1
+  }
+  num <- num + 1
+}
 
 # The repeat loop similar to the while loop, but it is made so that the expressions would be executed at least once.
 # Also it requires you to explicitly break the loop. 
@@ -135,9 +159,9 @@ difftime(t2,t1)
 # *hint* use the vectorized alternative rather than a loop.
 
 t1 <- Sys.time()
-
-
+thresholdValue <- 50
 # (type your code here)
+tmp <- aggregate(lifeExp~country, data = gapminder, FUN = "mean")
 
 
 t2 <- Sys.time()
