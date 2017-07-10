@@ -27,6 +27,7 @@ gapminder <- read.csv("gapminder-FiveYearData.csv", header = TRUE)
 # Base R provide convince ways to quickly generate graphics. The primary functions include:
 # Here we will use the mtcars dataset to have a look at these functions. 
 # First we need to see what variables we have so we call dim() and summary()
+# dimension
 dim(mtcars)
 # This is a data frame with 32 observations on 11 variables.
 # The search function of the Help tab in the Environment window is used to find out what these variables mean.

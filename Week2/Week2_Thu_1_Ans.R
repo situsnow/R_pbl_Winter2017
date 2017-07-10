@@ -92,8 +92,9 @@ lifeExp_bycountry %>% filter(mean_lifeExp == min(mean_lifeExp) | mean_lifeExp ==
 # arrange the rows in a data frame according to the order of any of the variables in the data frame. We can choose more than 
 # one variable to arrange the data frame by. It is similar to the sort button in Excel. 
 # You can use desc() inside of arrange() arrange(desc()) to order the data in descending order.
-lifeExp_bycountry %>% arrange(mean_lifeExp) %>%
+lifeExp_bycountry %>% arrange(desc(mean_lifeExp)) %>%
   head(1)
+
 
 # Challenge 5:Rearrange the lifeExp_bycountry in descending order.
 # Answer:

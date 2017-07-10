@@ -9,7 +9,7 @@ Date:  "June 2017."
 # We will cover control structures in session 2 this week.
   
 # Install packages
-install.packages("dyplr")
+install.packages("dplyr")
 library(dplyr)
 
 # Import data
