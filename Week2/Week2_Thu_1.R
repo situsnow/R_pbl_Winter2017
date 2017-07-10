@@ -1,16 +1,15 @@
 ---
-  Title: "Module 1  Introduction to R - Week 2 Session 1 Answers."
+Title: "Module 1  Introduction to R - Week 2 Session 2 Questions."
 Author:"Doogan, C.(2017)."
-
-Date:  "July 2017."
+Date:  "June 2017."
 ---
-  # This week we will be focusing on basic data exploration. However, we first need to learn about control flow. 
-  # This is fundamental to most programming languages and allows us to make conditions. 
-  # Since we have packages such as dplr though, we don't need to know any more than the basics.
-  # We will cover control structures in session 2 this week.
+# This week we will be focusing on basic data exploration. However, we first need to learn about control flow. 
+# This is fundamental to most programming languages and allows us to make conditions. 
+# Since we have packages such as dplr though, we don't need to know any more than the basics.
+# We will cover control structures in session 2 this week.
   
-  # Install packages
-  install.packages("dyplr")
+# Install packages
+install.packages("dyplr")
 library(dplyr)
 
 # Import data
@@ -24,17 +23,19 @@ year_country_gdp <- select(gapminder,year,country,gdpPercap)
 head(year_country_gdp)
 
 # Challenge 1: We wrote this code without using any pipes (%>%). Why should we consider using pipes?
-# Answer:
-# Pipes allow us to save time writting (and reduce syntax errors), aid R in running large data sets faster and imporve the readability of the code. 
+
+
+# (type your answer here)
+
 
 # This is the same code but with pipes.
 year_country_gdp <- gapminder %>% select(year,country,gdpPercap)
 
 # What did we just write?
 # Challenge 2: Translate the above code with pipes into English step-by-step.
-# Answer:
-# Take the gapminder data set and then pipe it to call the select function on it so that only the 
-# year, country and GDP per capita are going to be stored in a new variable called year_country_gdp.
+
+
+# (type your code here)
 
 
 ### filter()
@@ -46,20 +47,23 @@ year_country_gdp_euro <- gapminder %>% filter(continent=="Europe") %>% select(ye
 # Challenge 3: Write a code that will produce a dataframe that has 
 # the values for lifeExp, country and year for African countires only.
 # How many rows does your dataframe have and why?
-# Answer:
-year_country_lifeExp_Africa <- gapminder %>% filter(continent=="Africa") %>% select(year,country,lifeExp)
+
+
+# (type your answer here)
+
 
 # Here we have used pipes to pass the gapminder data frame to the filter() function. Then we passed the filtered gapminder 
 # data frame to the select() function.
-The order of functions here is important. 
+
+# Challenge 4: The order of functions here is important. 
 #Try swapping the filter() and select() functions around in the above code.
 # What is the result? Why has this happened?
-# Answer:
-year_country_gdp_africa <- gapminder %>%select(year,country,gdpPercap) %>%filter(continent=="Africa")
-# This causes a error. 
+
+
+# (type your answer here)
+
 
 ### group_by() and summarize()
-
 # One of the reasons we use dplyr is because it reduces the repetitiveness of writing code.
 # This helps reduced the number of errors we may encounter (because of our typing)
 # Let's say we wanted to find out year, countries and life expectancy for each of the continents. 
@@ -79,13 +83,12 @@ head(gapminder)
 gdp_bycontinents <- gapminder %>% group_by(continent) %>% summarize(mean_gdpPercap=mean(gdpPercap))
 print(gdp_bycontinents)
 
-# Challenge 4: Calculate the average life expectancy per country. 
+# Challenge 5: Calculate the average life expectancy per country. 
 # Which has the longest average life expectancy and which has the shortest average life expectancy?
-# Answer:
-lifeExp_bycountry <- gapminder %>% group_by(country) %>% summarize(mean_lifeExp=mean(lifeExp))
-lifeExp_bycountry %>% filter(mean_lifeExp == min(mean_lifeExp) | mean_lifeExp == max(mean_lifeExp))
-# Iceland 76.51 Year
-# Sierra Leone 36.77 Years
+
+
+# (type your answer here)
+
 
 ### arrange()
 # We could do this challenge another way. That is to use dplyrs arrange() function. Using this function, we can
@@ -95,10 +98,11 @@ lifeExp_bycountry %>% filter(mean_lifeExp == min(mean_lifeExp) | mean_lifeExp ==
 lifeExp_bycountry %>% arrange(mean_lifeExp) %>%
   head(1)
 
-# Challenge 5:Rearrange the lifeExp_bycountry in descending order.
-# Answer:
-lifeExp_bycountry %>% arrange(desc(mean_lifeExp)) %>%
-  head(1)
+# Challenge 6:rearrange the lifeExp_bycountry in descending order.
+
+
+# (type your answer here)
+
 
 # Using group_by() for multiple variables.
 # We can use group_by form more than one variable. In this example we will group by year and continent. 
@@ -107,31 +111,33 @@ head(gdp_bycontinents_byyear)
 
 # The advantage of using group_by() is that you can now call functions on multiple variables using summarize.
 
-# Challenge 6: In Challenge 4 you calculated the life expectancy per country.
+# Challenge 7: In Challenge 5 you calculated the life expectancy per country.
 # Now calculate the GDP by year for each continent and provide the mean and standard deviation *sd()* GDP per capita, 
 # and the mean and standard deviation of the population. 
-# Answer
-gdp_pop_bycontinents_byyear <- gapminder %>% group_by(continent,year) %>% summarize(mean_gdpPercap=mean(gdpPercap),sd_gdpPercap=sd(gdpPercap),mean_pop=mean(pop),sd_pop=sd(pop)
-                                                                                    
-                                                                                    ### Count() and nd()
-                                                                                    # You will be asked to count some observations a lot. dThere are two dplyr functions to do this. 
-                                                                                    # Count() is similar to a conditional statement. It will take the specification and match it to all of the data in a column
-                                                                                    # The then gives you how many of those observations matched your specification. 
-                                                                                    # You can also sort the data at the same time using sort =TRUE.
-                                                                                    gapminder %>% filter(year == 2002) %>% count(continent, sort = TRUE)
-                                                                                    
-                                                                                    # If we wanted to know the number of observations in calculations then we can use n().
-                                                                                    #In this example we want to know the standard error of the life expectancy per continent. 
-                                                                                    gapminder %>% group_by(continent) %>% summarize(se_pop = sd(lifeExp)/sqrt(n()))
-                                                                                    
-                                                                                    ### Mutate()
-                                                                                    # We can also create new variables prior to (or even after) summarizing information using mutate().
-                                                                                    gdp_pop_bycontinents_byyear <- gapminder %>% mutate(gdp_billion=gdpPercap*pop/10^9) %>% group_by(continent,year) %>% summarize(mean_gdpPercap=mean(gdpPercap), sd_gdpPercap=sd(gdpPercap), mean_pop=mean(pop), sd_pop=sd(pop), mean_gdp_billion=mean(gdp_billion), sd_gdp_billion=sd(gdp_billion))
-                                                                                    head(gdp_pop_bycontinents_byyear)
-                                                                                    
-                                                                                    # A lot of what we have covered is relatively advanced in respect to your MDS units, 
-                                                                                    # but they are powerful, and we will revisit their use later.
-                                                                                    
-                                                                                    # End Session.
-                                                                                    
-                                                                                    # References:Software Carpentry https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/
+
+
+# (type your answer here)
+
+
+### Count() and nd()
+# You will be asked to count some observations a lot. dThere are two dplyr functions to do this. 
+# Count() is similar to a conditional statement. It will take the specification and match it to all of the data in a column
+# The then gives you how many of those observations matched your specification. 
+# You can also sort the data at the same time using sort =TRUE.
+gapminder %>% filter(year == 2002) %>% count(continent, sort = TRUE)
+
+# If we wanted to know the number of observations in calculations then we can use n().
+#In this example we want to know the standard error of the life expectancy per continent. 
+gapminder %>% group_by(continent) %>% summarize(se_pop = sd(lifeExp)/sqrt(n()))
+
+### Mutate()
+# We can also create new variables prior to (or even after) summarizing information using mutate().
+gdp_pop_bycontinents_byyear <- gapminder %>% mutate(gdp_billion=gdpPercap*pop/10^9) %>% group_by(continent,year) %>% summarize(mean_gdpPercap=mean(gdpPercap), sd_gdpPercap=sd(gdpPercap), mean_pop=mean(pop), sd_pop=sd(pop), mean_gdp_billion=mean(gdp_billion), sd_gdp_billion=sd(gdp_billion))
+head(gdp_pop_bycontinents_byyear)
+
+# A lot of what we have covered is relatively advanced in respect to your MDS units, 
+# but they are powerful, and we will revisit their use later.
+
+# End Session.
+
+# References:Software Carpentry https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/
