@@ -112,7 +112,7 @@ head(gdp_bycontinents_byyear)
 # and the mean and standard deviation of the population. 
 # Answer
 gdp_pop_bycontinents_byyear <- gapminder %>% group_by(continent,year) %>% summarize(mean_gdpPercap=mean(gdpPercap),sd_gdpPercap=sd(gdpPercap),mean_pop=mean(pop),sd_pop=sd(pop))
-
+                                                                                    
 ### Count() and nd()
 # You will be asked to count some observations a lot. dThere are two dplyr functions to do this. 
 # Count() is similar to a conditional statement. It will take the specification and match it to all of the data in a column
