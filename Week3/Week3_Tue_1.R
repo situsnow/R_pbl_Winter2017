@@ -19,25 +19,27 @@ head(diamonds)
 
 
 # (Type your code here)
-
+dim(diamonds)[1]
+nrow(diamonds)
 
 # Challenge 2: How many variables are in the data set?
 
 
 # (Type your code here)
-
-
+dim(diamonds)[2]
+ncol(diamonds)
 # Challenge 3: How many ordered factors are in the set?
 
 
 # (Type your code here)
-
+str(diamonds)
 
 # Challenge 4: What letter represents the best color for a diamonds?
 
 
 # (Type your code here)
-
+levels(diamonds$color)
+help(diamonds)
 
 # Challenge 5: Create a histogram of the price of all the diamonds in the diamond data set.
 
@@ -50,7 +52,9 @@ head(diamonds)
 
 
 # (Type your code here)
-
+mean(diamonds$price)
+median(diamonds$price)
+summary(diamonds$price)
 
 # Challenge 7: Have a go at explaining the dirstibution and summary stats of the histogram.
 

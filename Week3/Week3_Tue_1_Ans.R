@@ -55,6 +55,8 @@ summary(diamonds$price)
 # Answer:
 # * Hint* Use dplyr functions
 diamonds %>% filter(price < 500) %>% summarise(n = n())
+#n = n(), the number of observations in current group, in package dplyr
+# or diamonds %>% filter(price < 500) %>% nrow()
 ##      n
 ## 1 1729
 
@@ -72,14 +74,14 @@ diamonds %>% filter(price >= 15000) %>% summarise(n = n())
 # Try limiting the x-axis, altering the bin width,
 # and setting different breaks on the x-axis.
 # Answer:
-ggplot(diamonds, aes(x = price)) +  geom_histogram(color = "black", fill = "DarkOrange", binwidth = 25) + theme(axis.text.x = element_text(angle = 90)) + coord_cartesian(c(0,2000)) +xlab("Price") + ylab("Count")
+ggplot(diamonds, aes(x = price)) +  geom_histogram(color = "black", fill = "DarkOrange", binwidth = 25) + theme(axis.text.x = element_text(angle = 90)) + coord_cartesian(c(0,1000)) +xlab("Price") + ylab("Count")
 
 # Challenge 11:  Break out the histogram of diamond prices by cut.
 # You should have five histograms in separate
 # panels on your resulting plot.
 # * Hint* Use the facet_grid to do this "facet_grid(cut~.)"
 # Answer:
-ggplot(diamonds, aes(x = price)) +  geom_histogram(color = "black", fill = "DarkOrange", binwidth = 25) + theme(axis.text.x = element_text(angle = 90)) + coord_cartesian(c(0,4000)) +facet_grid(cut~.) + xlab("Price") + ylab("Count")
+ggplot(diamonds, aes(x = price)) +  geom_histogram(color = "black", fill = "DarkOrange", binwidth = 25) + theme(axis.text.x = element_text(angle = 90)) + coord_cartesian(c(0,4000)) +facet_grid(cut~color) + xlab("Price") + ylab("Count")
 
 
 # Challenge 12: Which cut has the highest priced diamond?
@@ -97,6 +99,6 @@ diamonds %>%group_by(cut) %>% summarise(max_price = max(price),min_price = min(p
 ## 3 Very Good     18818       336         2648
 ## 4   Premium     18823       326         3185
 ## 5     Ideal     18806       326         1810
-
+max(diamonds$price)
 # End Session
 # Source http://fch808.github.io/Data-Analysis-with-R-Exercises.html
